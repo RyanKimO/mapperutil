@@ -28,7 +28,7 @@ package com.overnodes.mapperutil;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-import com.overnodes.ui.kr.v2.common.response.OVNDResponse;
+import com.overnodes.response.response.OVNDResponse;
 import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Collections;
