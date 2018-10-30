@@ -22,7 +22,7 @@
  *  ================================================================================
  *
  */
-package com.overnodes.mapperutil;
+package com.overnodes.common.mapperutil;
 
 import com.google.gson.JsonElement;
 import java.util.Collection;

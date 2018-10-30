@@ -22,16 +22,13 @@
  *  ================================================================================
  *
  */
-package com.overnodes.response.response;
+package com.overnodes.common.response;
 
-
-
-import static com.overnodes.response.response.OVNDException.EXCEPTION_ERROR_SYSTEM;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.overnodes.mapperutil.MapperUtil;
-import com.overnodes.mapperutil.NullUtil;
+import com.overnodes.common.mapperutil.MapperUtil;
+import com.overnodes.common.mapperutil.NullUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -83,7 +80,7 @@ public class OVNDResponse extends RuntimeException {
         result.addProperty("additionalMessage", this.additionalMessage);
       }
     } else {
-      return EXCEPTION_ERROR_SYSTEM.getJsonObject();
+      return OVNDException.EXCEPTION_ERROR_SYSTEM.getJsonObject();
     }
     return result;
   }

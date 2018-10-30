@@ -23,12 +23,12 @@
  *
  */
 
-package com.overnodes.mapperutil;
+package com.overnodes.common.mapperutil;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-import com.overnodes.response.response.OVNDResponse;
+import com.overnodes.common.response.OVNDResponse;
 import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Collections;

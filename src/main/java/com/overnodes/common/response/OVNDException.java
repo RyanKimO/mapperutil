@@ -22,7 +22,7 @@
  *  ================================================================================
  *
  */
-package com.overnodes.response.response;
+package com.overnodes.common.response;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;

@@ -22,7 +22,7 @@
  *  ================================================================================
  *
  */
-package com.overnodes.response.response;
+package com.overnodes.common.response;
 
 
 /**
@@ -60,6 +60,7 @@ public enum OVNDResponseCode {
   ERROR_USER_BLOCKCHAIN_ID_NOT_REGISTERED("E022","user did not register blockchain id"),
   ERROR_BLOCKCHAIN_ID_TOKEN_INVALID("E023", "invalid blockchain id token"),
   ERROR_SAVE_BLOCKCHAIN_ID("E024", "failed to save blockchain id to database"),
+  ERROR_ORDER_ALREADY_TRANSFER("E025", "charge order is already transfer completed"),
 
   // E101 ~ E200 : DATA
   ERROR_INVALID_REQUEST("E101", "invalid request"),

@@ -22,18 +22,26 @@
  *  ================================================================================
  *
  */
-package com.overnodes.mapperutil;
+package com.overnodes.common.mapperutil;
 
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
-import com.overnodes.mapperutil.mapper.OVNDDateTypeAdapter;
-import com.overnodes.response.response.OVNDResponse;
+import com.overnodes.common.mapperutil.mapper.Depth;
+import com.overnodes.common.mapperutil.mapper.DepthTypeAdapter;
+import com.overnodes.common.mapperutil.mapper.OVNDDateTypeAdapter;
+import com.overnodes.common.mapperutil.mapper.SpringfoxApiListingJsonSerializer;
+import com.overnodes.common.mapperutil.mapper.SpringfoxJsonToGsonTypeAdapter;
+import com.overnodes.common.mapperutil.mapper.SpringfoxResourceListingJsonSerializer;
+import com.overnodes.common.mapperutil.mapper.SpringfoxSecurityConfigurationJsonSerializer;
+import com.overnodes.common.response.OVNDResponse;
+import com.sun.org.apache.xerces.internal.parsers.SecurityConfiguration;
 import eu.bittrade.crypto.core.ECKey;
 import java.lang.reflect.Type;
 import java.util.Date;
@@ -42,14 +50,42 @@ import org.apache.commons.lang3.StringUtils;
 import org.bouncycastle.math.ec.custom.sec.SecP256K1Curve;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import springfox.documentation.service.ApiListing;
+import springfox.documentation.service.ResourceListing;
+import springfox.documentation.spring.web.json.Json;
 
 public class MapperUtil {
 
   private static final Gson GSON_INSTANCE = new GsonBuilder()
       .registerTypeAdapter(Date.class, new OVNDDateTypeAdapter())
+      .registerTypeAdapter(Depth.class, new DepthTypeAdapter())
+      // needed for making calls to /v2/api-docs
+      .registerTypeAdapter(Json.class,
+          new SpringfoxJsonToGsonTypeAdapter())
+      // rest are needed for making calls to /swagger-ui.html
+      .registerTypeAdapter(ApiListing.class,
+          new SpringfoxApiListingJsonSerializer())
+//        .registerTypeAdapter(SwaggerResource.class,
+//            new SpringfoxResourceJsonSerializer())
+      .registerTypeAdapter(ResourceListing.class,
+          new SpringfoxResourceListingJsonSerializer())
+//        .registerTypeAdapter(UiConfiguration.class,
+//            new SpringfoxUiConfigurationJsonSerializer())
+      // needed if you have security
+      .registerTypeAdapter(SecurityConfiguration.class,
+          new SpringfoxSecurityConfigurationJsonSerializer())
+      //.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+
       .setExclusionStrategies(new GsonExclusionStrategy(SecP256K1Curve.class))
       .setExclusionStrategies(new GsonExclusionStrategy(ECKey.class))
       .create();
+
+  private static final Gson GSON_INSTANCE_WITH_NAMING_POLICY = new GsonBuilder()
+      .registerTypeAdapter(Date.class, new OVNDDateTypeAdapter())
+      .registerTypeAdapter(Depth.class, new DepthTypeAdapter())
+      .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+      .create();
+
 
   private static final JsonParser JSON_PARSER_INSTANCE = new JsonParser();
   private static final Type LIST_OF_JSONOBJECT = new TypeToken<List<JsonObject>>() {
@@ -71,6 +107,11 @@ public class MapperUtil {
   public static Gson getGsonInstance() {
     return GSON_INSTANCE;
   }
+
+  public static Gson getGsonInstanceWithNamingPolicy() {
+    return GSON_INSTANCE_WITH_NAMING_POLICY;
+  }
+
 
   public static JsonParser getJsonParserInstance() {
     return JSON_PARSER_INSTANCE;

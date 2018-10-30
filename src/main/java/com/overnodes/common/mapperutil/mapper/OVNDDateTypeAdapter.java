@@ -22,7 +22,7 @@
  *  ================================================================================
  *
  */
-package com.overnodes.mapperutil.mapper;
+package com.overnodes.common.mapperutil.mapper;
 
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;

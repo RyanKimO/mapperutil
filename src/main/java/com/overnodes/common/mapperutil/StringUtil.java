@@ -23,7 +23,7 @@
  *
  */
 
-package com.overnodes.mapperutil;
+package com.overnodes.common.mapperutil;
 
 import java.util.Iterator;
 import java.util.List;
