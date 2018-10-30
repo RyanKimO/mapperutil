@@ -59,7 +59,10 @@ public enum ResponseCode {
   ERROR_TRANSACTION_REQUIRED("210", "transaction roll back"),
 
   // U000 ~ U100 : RESTRICT
-  RESTRICT_TRANSACTION_ACCESS("U001", "user unable transaction"),;
+  RESTRICT_TRANSACTION_ACCESS("U001", "user unable transaction"),
+  STEEMJ_API_ERROR("U002", "steem api error"),
+  STEEMJ_SERVICE_EXCEPTION("U003", "steemJ service error");
+
 
   private final String code;
   private final String message;
